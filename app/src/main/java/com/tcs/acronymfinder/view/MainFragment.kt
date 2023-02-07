@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -28,10 +28,10 @@ private const val ARG_PARAM2 = "param2"
  * Use the [MainFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var recyclerViewAdapter:RecyclerViewAdapter
     private lateinit var searchBtn:Button
-    private lateinit var etInput:EditText
+    private lateinit var etInput:SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +51,7 @@ class MainFragment : Fragment() {
 
     private fun initView(view: View) {
         searchBtn = view.findViewById<Button>(R.id.btn_search)
-        etInput = view.findViewById<EditText>(R.id.et_search)
+        etInput = view.findViewById<SearchView>(R.id.bt_search)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val decoration = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
@@ -70,11 +70,9 @@ class MainFragment : Fragment() {
                 Toast.makeText(activity,"Error in getting data",Toast.LENGTH_SHORT).show()
             }
         })
-        searchBtn.setOnClickListener(View.OnClickListener {
+      /*  searchBtn.setOnClickListener(View.OnClickListener {
             viewModel.makeApiCall(etInput.text.toString())
-        })
-
-
+        })*/
     }
 
     companion object {
@@ -95,5 +93,13 @@ class MainFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onQueryTextSubmit(p0: String?): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun onQueryTextChange(p0: String?): Boolean {
+        TODO("Not yet implemented")
     }
 }
