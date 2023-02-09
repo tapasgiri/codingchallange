@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcs.acronymfinder.adapter.RecyclerViewAdapter
 import com.tcs.acronymfinder.databinding.FragmentMainBinding
+import com.tcs.acronymfinder.util.Utils
 import com.tcs.acronymfinder.viewModel.MainActivityViewModel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,7 +33,7 @@ private const val ARG_PARAM2 = "param2"
 class MainFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var recyclerViewAdapter:RecyclerViewAdapter
     private lateinit var searchBtn:Button
-    private lateinit var etInput:SearchView
+    private lateinit var etInput:EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,9 +71,10 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
                 Toast.makeText(activity,"Error in getting data",Toast.LENGTH_SHORT).show()
             }
         })
-      /*  searchBtn.setOnClickListener(View.OnClickListener {
+        searchBtn.setOnClickListener(View.OnClickListener {
+            if(Utils.isOnline(requireContext()))
             viewModel.makeApiCall(etInput.text.toString())
-        })*/
+        })
     }
 
     companion object {
