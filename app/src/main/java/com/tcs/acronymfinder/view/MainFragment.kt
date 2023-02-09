@@ -7,15 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.tcs.acronymfinder.R
 import com.tcs.acronymfinder.adapter.RecyclerViewAdapter
+import com.tcs.acronymfinder.databinding.FragmentMainBinding
 import com.tcs.acronymfinder.viewModel.MainActivityViewModel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,16 +43,15 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
-        initView(view)
+        val binding = FragmentMainBinding.inflate(layoutInflater)
+       // val view = inflater.inflate(R.layout.fragment_main, container, false)
+        initView(binding)
         initViewModel()
         return view
     }
 
-    private fun initView(view: View) {
-        searchBtn = view.findViewById<Button>(R.id.btn_search)
-        etInput = view.findViewById<SearchView>(R.id.bt_search)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
+    private fun initView(root: FragmentMainBinding) {
+        val recyclerView = root.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val decoration = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
         recyclerView.addItemDecoration(decoration)
