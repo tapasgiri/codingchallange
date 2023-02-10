@@ -33,7 +33,7 @@ private const val ARG_PARAM2 = "param2"
 class MainFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var recyclerViewAdapter:RecyclerViewAdapter
     private lateinit var searchBtn:Button
-    private lateinit var etInput:EditText
+    private lateinit var etInput:SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,10 +49,12 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
        // val view = inflater.inflate(R.layout.fragment_main, container, false)
         initView(binding)
         initViewModel()
-        return view
+        return binding.root
     }
 
     private fun initView(root: FragmentMainBinding) {
+        etInput = root.svSearch
+        searchBtn = root.btnSearch
         val recyclerView = root.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val decoration = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
@@ -73,7 +75,9 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
         })
         searchBtn.setOnClickListener(View.OnClickListener {
             if(Utils.isOnline(requireContext()))
-            viewModel.makeApiCall(etInput.text.toString())
+             viewModel.makeApiCall(etInput.query.toString())
+            else
+                Toast.makeText(activity,"No internet",Toast.LENGTH_SHORT).show()
         })
     }
 

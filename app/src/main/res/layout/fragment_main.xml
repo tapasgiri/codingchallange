@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.textfield.TextInputLayout
+   <!-- <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bt_search"
@@ -22,17 +22,17 @@
 
         </com.google.android.material.textfield.TextInputEditText>
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>-->
 
-    <!--<androidx.appcompat.widget.SearchView
+    <androidx.appcompat.widget.SearchView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bt_search"
+        android:id="@+id/sv_search"
         app:queryHint="Enter text"
         android:iconifiedByDefault="false"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>-->
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
         android:id="@+id/btn_search"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bt_search" />
+        app:layout_constraintTop_toBottomOf="@id/sv_search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -55,6 +55,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_search"
         app:layout_constraintVertical_bias="0.149" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
