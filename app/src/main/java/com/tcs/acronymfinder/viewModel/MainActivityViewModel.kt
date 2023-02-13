@@ -15,13 +15,12 @@ import retrofit2.Response
 
 class MainActivityViewModel: ViewModel() {
      var recyclerListLiveData:MutableLiveData<RecyclerList>
-     var list=ArrayList<String> ()
+
     init {
         recyclerListLiveData = MutableLiveData()
     }
 
     fun getRecyclerListObserver():MutableLiveData<RecyclerList>{
-
         return recyclerListLiveData
     }
 

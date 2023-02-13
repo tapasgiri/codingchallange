@@ -30,8 +30,6 @@ class RecyclerViewAdapter : RecyclerView.Adapter<MyViewHolder>() {
 }
 
 class MyViewHolder(val binding: ListLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-   /* val tvName = itemView.findViewById<TextView>(R.id.tv_name)
-    val tvDesc= itemView.findViewById<TextView>(R.id.tv_desc)*/
   fun bind(data: Lfs){
        binding.recyclerData = data
        binding.executePendingBindings()
