@@ -32,6 +32,7 @@ class MainActivityViewModel: ViewModel() {
              Log.d("api response :",response.toString())
              if(response.size>0)
               recyclerListLiveData.postValue(response[0])
+
         }
     }
 }
