@@ -45,13 +45,10 @@ class RecyclerViewAdapter : RecyclerView.Adapter<MyViewHolder>(), Filterable {
                     items
                         .filter {
                             (it.lf.contains(constraint!!))
-
                         }
                         .forEach { filteredItems.add(it) }
                     filteredItems = resultList
-                    // countryFilterList = resultList
                 }
-
                 return FilterResults().apply { values = filteredItems }
             }
 
@@ -62,7 +59,6 @@ class RecyclerViewAdapter : RecyclerView.Adapter<MyViewHolder>(), Filterable {
                     results.values as ArrayList<Lfs>
                 notifyDataSetChanged()
             }
-
         }
     }
 }

@@ -8,7 +8,6 @@ class RetroInstance {
         const val base_url = "http://www.nactem.ac.uk/software/acromine/"
 
         fun getRetroInstance(): Retrofit{
-
             return Retrofit.Builder().baseUrl(base_url)
                 .addConverterFactory(GsonConverterFactory.create()).build()
         }

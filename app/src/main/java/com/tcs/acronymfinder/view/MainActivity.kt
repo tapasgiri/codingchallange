@@ -8,15 +8,17 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tcs.acronymfinder.R
 import com.tcs.acronymfinder.adapter.RecyclerViewAdapter
 import com.tcs.acronymfinder.databinding.ActivityMainBinding
+import com.tcs.acronymfinder.repository.AcronymRepository
+import com.tcs.acronymfinder.util.NetworkResult
 import com.tcs.acronymfinder.util.Utils
-import com.tcs.acronymfinder.viewModel.MainActivityViewModel
+import com.tcs.acronymfinder.viewModel.MainViewModel
+import com.tcs.acronymfinder.viewModel.MainViewModelFactory
 
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private lateinit var recyclerViewAdapter: RecyclerViewAdapter
-    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var mainViewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,13 +31,20 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = recyclerViewAdapter
 
-        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-        viewModel.getRecyclerListObserver().observe(this, Observer {
-            if (it!=null){
-                recyclerViewAdapter.addData(it.lfs)
-                recyclerViewAdapter.notifyDataSetChanged()
+        val repository = AcronymRepository()
+
+        mainViewModel = ViewModelProvider(this,MainViewModelFactory(repository)).
+        get(MainViewModel::class.java)
+
+        mainViewModel.items.observe(this, Observer {
+            when(it){
+                is NetworkResult.Success->{
+                    recyclerViewAdapter.addData(it.data!![0].lfs)
+                }
+                is NetworkResult.Error->{}
             }
         })
+
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -46,7 +55,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onQueryTextChange(newText: String?): Boolean {
         if (newText != null && newText.length > 2) {
             if(Utils.isOnline(this))
-            viewModel.makeApiCall(newText)
+                mainViewModel.getItems(newText)
             else
                 showMessage()
         }
