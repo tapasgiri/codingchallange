@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tcs.acronymfinder.StoreApplication
 import com.tcs.acronymfinder.adapter.RecyclerViewAdapter
 import com.tcs.acronymfinder.databinding.ActivityMainBinding
 import com.tcs.acronymfinder.repository.AcronymRepository
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = recyclerViewAdapter
 
-        val repository = AcronymRepository()
+        val repository = (application as StoreApplication).dataRepository
 
         mainViewModel = ViewModelProvider(this,MainViewModelFactory(repository)).
         get(MainViewModel::class.java)
